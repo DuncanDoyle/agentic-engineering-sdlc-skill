@@ -15,6 +15,30 @@ The repository root is the skill.
 | `scripts/install-skill.sh` | Installs the runtime skill into the shared skills directory |
 | `docs/testing.md` | Test scenarios used to develop the skill, and what they found |
 
+## Usage
+
+Invoke the skill and say what you want. In Claude Code that's `/agentic-engineering-sdlc <request>`; in Codex, `$agentic-engineering-sdlc <request>` or ask it to use the skill. In a repo with `docs/phase-status.md` or `docs/roadmap.md`, a plain request ("close phase 4") usually loads the skill on its own.
+
+| Request | What happens |
+|---|---|
+| `/agentic-engineering-sdlc what can I do?` | Lists the entry points, where the project stands, and the sensible next step |
+| `/agentic-engineering-sdlc set up the roadmap for <project>` | Brainstorm → `roadmap.md`, `phase-status.md`, `decisions.md` |
+| `/agentic-engineering-sdlc start phase 4` | Record base SHA → design → implementation plan → cross-model review of both → your approval before code |
+| `/agentic-engineering-sdlc review phase 4` | Cross-model review of the phase diff → triage → findings tracked and proposed as stabilization sub-phases |
+| `/agentic-engineering-sdlc start sub-phase 4.1 for #31 and #32` | Writes `docs/phases/phase-4/phase-4.1-brief.md` (behaviour, not code) and fills the Sub-phase block |
+| `/agentic-engineering-sdlc continue sub-phase 4.1` | Reads the brief + status and works the queue — in the same or a fresh session, Claude or Codex |
+| `/agentic-engineering-sdlc close sub-phase 4.1` / `close phase 4` | Checks exit gates, writes the `-complete.md` record, advances the status |
+
+A typical stabilization round:
+
+```
+/agentic-engineering-sdlc review phase 4                  # Codex reviews, author triages, fix work queued
+/agentic-engineering-sdlc start sub-phase 4.1 for Q3, Q4  # brief + status written
+# new session
+/agentic-engineering-sdlc continue sub-phase 4.1          # implement against the brief
+/agentic-engineering-sdlc close sub-phase 4.1             # cross-model review, gates, 4.1-complete record
+```
+
 ## What it creates in a project
 
 ```
