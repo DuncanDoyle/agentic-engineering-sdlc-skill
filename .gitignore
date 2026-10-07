@@ -1,0 +1,5 @@
+# Session-local scratch — not part of the skill
+.superpowers/
+resume_claude_session
+__pycache__/
+*.pyc
